@@ -1,0 +1,60 @@
+/*screen and (max-width:768px)*/ 
+.header_bar {
+    justify-content: space-between;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.header_secondary_bar, .footer-link {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.logo_alogro {
+    order: 1;
+}
+  
+.navigation_icon {
+    order: 2;
+}
+  
+.box_search {
+    order: 3;
+    flex: 1 1 100%; 
+}
+
+.promoted_icons ul {
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/*product-page*/
+.product-page {
+    flex-direction: column;
+}
+
+.product-right {
+    border-left: none;
+    border-top: 1px solid #ddd;
+}
+
+.product-left h1 {
+    font-size: 20px;
+    text-align: center;
+}
+
+.product-left img {
+    margin: 0 auto;
+    display: block;
+}
+
+
+/*alogro-links*/
+.alogro-links-box {
+    flex-direction: column;
+    gap: 8px;
+}
+
+.alogro-links {
+    width: 100%;
+}
