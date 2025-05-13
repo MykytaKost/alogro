@@ -1,8 +1,11 @@
-/*screen and (max-width:768px)*/ 
+
+  /*screen and (max-width:768px)*/ 
+  /*
 .header_bar {
     justify-content: space-between;
     padding-left: 16px;
     padding-right: 16px;
+    flex-wrap: wrap;    
 }
 
 .header_secondary_bar, .footer-link {
@@ -36,4 +39,4 @@
 .promoted_icons ul {
     flex-wrap: wrap;
     gap: 10px;
-}
+}*/

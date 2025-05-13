@@ -1,10 +1,34 @@
-
-  
 body {
     margin: 0;
     font-family: "Open Sans", sans-serif;
     background-color: #ECEFF1;
 }
+body.contrast-op-1 {
+    background-color: ECEFF1;
+    color: black;
+}
+
+body.contrast-op-2 *:not(.no-contrast):not(.no-contrast *),
+body.contrast-op-3 *:not(.no-contrast):not(.no-contrast *),
+body.contrast-op-4 *:not(.no-contrast):not(.no-contrast *) {
+    background-color: black !important;
+    color: white !important;
+    border-color: white !important;
+}
+
+body.contrast-op-3 *:not(.no-contrast):not(.no-contrast *) {
+    background-color: yellow !important;
+    color: black !important;
+    border-color: black !important;
+}
+
+body.contrast-op-4 *:not(.no-contrast):not(.no-contrast *) {
+    background-color: black !important;
+    color: yellow !important;
+    border-color: yellow !important;
+}
+
+
 
 /*** header_bar ***/
 header {
@@ -23,14 +47,19 @@ header {
 .header_bar { 
     display: flex;
     align-items: center;
-    justify-content: space-between; 
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
     padding: 16px 24px;
     max-width: 1600px; 
     margin: 0 auto;  
     width: 100%; 
     box-sizing: border-box;
+    
+    justify-content: center;
 }   
+
+.logo-alogro {
+    order: 1;
+}
 
 .box_search {
     display: flex;
@@ -40,7 +69,7 @@ header {
     max-width: 800px;
     border-radius: 5px;
     padding: 5px;
-    order: 2;
+    order: 3;
     flex: 1 1 auto;
     min-width: 0;
 }
@@ -81,7 +110,6 @@ header {
 
 .search_select select {
     border: 1px solid;
-    border-left: none;
     border-right: none;
     height: 40px;
     background: none;
@@ -97,7 +125,8 @@ header {
 .button_search button {
     height: 40px;
     background-color: #ff5a00;
-    border: none;
+    border-left: none;
+    border: 1px solid;
     padding: 10px 15px;
     cursor: pointer;
     color: #ffffff;
@@ -105,12 +134,55 @@ header {
     box-sizing: border-box;
 }
 
+/* contrst */
+.contrast-switch {
+    order: 2;
+    margin-right: auto;
+}
+
+ul.wcag {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+}
+  
+li.contrast span {
+    font-weight: 700;
+    font-size: 18px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+  
+li.contrast span.con_op_1 {
+    color: black !important;
+    background-color: white;
+    border: 1px solid #d9d9d9;
+}
+  
+li.contrast span.con_op_2 {
+    color: white !important;
+    background-color: black;
+}
+  
+li.contrast span.con_op_3 {
+    color: black !important;
+    background-color: #ffff00;
+}
+  
+li.contrast span.con_op_4 {
+    color: #ffff00 !important;
+    background-color: black;
+}
+
 .navigation_icon {
     display: flex;
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
-    order: 3;
+    order: 4;
     min-width: 0;
 }
 
@@ -142,9 +214,92 @@ header {
     margin-left: 5px;
 }
 
+@media screen and (max-width: 1300px) {
+    .Moje_Allegro {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .header_bar {
+        justify-content: space-between;
+        padding-left: 16px;
+        padding-right: 16px;
+        flex-wrap: wrap;    
+    }
+
+    .header_secondary_bar, .footer-link {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+
+    .logo_alogro {
+        order: 1;
+    }
+    
+    .navigation_icon {
+        order: 2;
+    }
+    
+    .box_search {
+        order: 3;
+        flex: 1 1 100%; 
+        max-width: none;
+    }
+
+    .alogro-links-box {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .alogro-links {
+        width: 100%;
+    }
+
+    .promoted_icons ul {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .header_bar {
+        justify-content: space-between;
+    }
+
+    .contrast-switch {
+        margin-right: unset;
+    }
+    
+    .navigation_icon {
+        margin: 0 auto 0 auto;
+    }
+    
+}
+
+@media screen and (max-width: 550px) {
+    .szukaj_wielu{
+        display: none;
+    }
+    
+}
+
+@media screen and (max-width: 455px) {
+    .search_select{
+        display: none;
+    }    
+}
+
+@media screen and (max-width: 406px) {
+    .header_bar{
+        justify-content: center;
+    }    
+}
+
+
 /*** header_secondary_bar ***/
 .box_header_secondary_bar {
-    /*margin-top: 82px;  */ 
     border: 1px solid #938989;
     border-left: none; border-right: none;
     padding-left: 16px;
@@ -164,6 +319,8 @@ header {
     border: 1px solid #938989;
     border-top: none; border-bottom: none;
     height: 40px;   
+    display: flex;
+    justify-content: center;
 }
 
 .header_dropdown button {
@@ -187,7 +344,6 @@ header {
 .promoted_icons {
     display: flex;
     align-items: center;    
-    gap: 24px;
 }
 
 .promoted_icons ul {
@@ -220,14 +376,11 @@ header {
     height: 18px;
 }
 
-.profile_icon {
-    display: flex;
-    align-items: center;
-}
-
 .profile_icon picture img {
     width: 26px;
     height: 26px;
+    display: flex;
+    justify-content: center;
 } 
 
 .status-panel {
@@ -245,6 +398,31 @@ header {
     color: #0000008A;
     text-decoration: none;
 }
+
+@media screen and (max-width: 1050px) {
+    .promoted_icons li:nth-child(4) {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    .promoted_icons li:nth-child(3) {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 605px) {
+    .status-panel{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 505px) {
+    .promoted_icons li:nth-child(2) {
+        display: none;
+    }
+}
+
 /*
 /*** main ***/
 /*** slider ***/
@@ -276,7 +454,7 @@ header {
     background-color: #ffffff;
     max-width: 1600px;
     margin: 0 auto 32px;
-    overflow-x: auto;
+    flex-wrap: wrap;
 }
 
 .inbox_opbox_sheet_content {
@@ -308,11 +486,11 @@ header {
 /*** opbox-sheet  ***/
 .opbox-sheet {
     display: flex;
-    flex-wrap: nowrap;    
+    justify-content: center;    
+    flex-wrap: wrap;
     background-color: #ffffff;
     max-width: 1600px;
     margin: 0 auto 32px;
-    overflow-x: auto;
 }
 
 .product-card {
@@ -441,7 +619,7 @@ footer {
     max-width: 1600px;    
     margin: 16px auto;
     padding: 24px;
-    height: 70px;
+    height: auto;
     box-sizing: border-box;
     width: 100%;
 }
@@ -457,13 +635,15 @@ footer {
 .alogro-links-box {
     display: flex;  
     flex-wrap: wrap;
-    
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .alogro-links {
-    
-    text-align: left;   
-    flex-grow: 1;
+    flex: 0 1 80px;
+    text-align: left; 
 }
 
 .alogro-links ul {

@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">    
-    <link rel="stylesheet" media="screen and (max-width:768px)" href="./mobile.css">    
+    <link rel="stylesheet" media="screen and (max-width:1300px)" href="./mobile.css"> 
     <title>Alogro - atrakcyjne ceny - Strona Główna</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
-<body>
+<body id="body">
     <header>
         
         <div class="header_bar_fix">
@@ -50,15 +50,24 @@
                             <span>SZUKAJ</span>
                         </button>
                     </div>  
-                </div>         
+                </div>  
+
+                <div class="contrast-switch no-contrast">
+                    <ul class="wcag">
+                        <li class="right contrast"><span class="con_op_1">A</span></li> <!-- Jasna -->
+                        <li class="right contrast"><span class="con_op_2">A</span></li> <!-- Ciemna -->
+                        <li class="right contrast"><span class="con_op_3">A</span></li> <!-- Kontrast jasny -->
+                        <li class="right contrast"><span class="con_op_4">A</span></li> <!-- Kontrast ciemny -->
+                      </ul>
+                </div>       
 
                 <nav class="navigation_icon">
                     <div>
-                        <button type="button"><img src="/navigation_icon/u_truck.svg" alt=""></button>
-                        <button type="button"><img src="/navigation_icon/fi_heart.svg" alt=""></button>
-                        <button type="button"><img src="/navigation_icon/u_comments-alt.svg" alt=""></button>
-                        <button type="button"><img src="/navigation_icon/u_bell.svg" alt=""></button>
-                        <button type="button"><img src="/navigation_icon/u_shopping-bag.svg" alt=""></button>
+                        <button class="icon-truck" type="button"><img src="/navigation_icon/u_truck.svg" alt=""></button>
+                        <button class="icon-heart" type="button"><img src="/navigation_icon/fi_heart.svg" alt=""></button>
+                        <button class="icon-comments" type="button"><img src="/navigation_icon/u_comments-alt.svg" alt=""></button>
+                        <button class="icon-bell" type="button"><img src="/navigation_icon/u_bell.svg" alt=""></button>
+                        <button class="icon-heart" type="button"><img src="/navigation_icon/u_shopping-bag.svg" alt=""></button>
                     </div>
 
                     <div class="Moje_Allegro">  
@@ -73,7 +82,7 @@
         <div class="box_header_secondary_bar">
             <div class="header_secondary_bar">
                 <div class="header_dropdown">
-                    <button>kategorie<img src="/promoted_icons/u_angle-down.svg" alt=""></button>
+                    <button>kategorie<img src="/navigation_icon/u_angle-down.svg" alt=""></button>
                 </div>
                 <div class="promoted_icons">
                     <ul>
@@ -149,39 +158,6 @@
         </div>
 
         <div class="opbox-sheet">
-            <div class="product-card">
-                <a href="">
-                    <img src="/content/GAZ-PIEPRZOWY-TW_500-STOZEK-40ml-OBRONNY-G046.jpg" alt="Product Image" class="product_image">
-                    <ul>
-                        <li><strong>18,77 zł</strong></li>
-                        <li><img src="/navigation_icon/brand-subbrand-smart-d8bfa93f10.svg" alt="Smart Brand"></li>
-                        <li>GAZ PIEPRZOWY TW_500 STOŻEK 63ml OBRONNY G047</li>
-                        <li>dostawa w sobotę</li>
-                    </ul>
-                </a>
-            </div>
-            <div class="product-card">
-                <a href="">
-                    <img src="/content/GAZ-PIEPRZOWY-TW_500-STOZEK-40ml-OBRONNY-G046.jpg" alt="Product Image" class="product_image">
-                    <ul>
-                        <li><strong>18,77 zł</strong></li>
-                        <li><img src="/navigation_icon/brand-subbrand-smart-d8bfa93f10.svg" alt="Smart Brand"></li>
-                        <li>GAZ PIEPRZOWY TW_500 STOŻEK 63ml OBRONNY G047</li>
-                        <li>dostawa w sobotę</li>
-                    </ul>
-                </a>
-            </div>
-            <div class="product-card">
-                <a href="">
-                    <img src="/content/GAZ-PIEPRZOWY-TW_500-STOZEK-40ml-OBRONNY-G046.jpg" alt="Product Image" class="product_image">
-                    <ul>
-                        <li><strong>18,77 zł</strong></li>
-                        <li><img src="/navigation_icon/brand-subbrand-smart-d8bfa93f10.svg" alt="Smart Brand"></li>
-                        <li>GAZ PIEPRZOWY TW_500 STOŻEK 63ml OBRONNY G047</li>
-                        <li>dostawa w sobotę</li>
-                    </ul>
-                </a>
-            </div>
             <div class="product-card">
                 <a href="">
                     <img src="/content/GAZ-PIEPRZOWY-TW_500-STOZEK-40ml-OBRONNY-G046.jpg" alt="Product Image" class="product_image">
