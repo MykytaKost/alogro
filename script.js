@@ -16,10 +16,7 @@ function updateHeaderOffset() {
     
         contrastOptions.forEach((option) => {
             option.addEventListener("click", function () {
-                // Usuń istniejące klasy kontrastu
                 body.classList.remove("contrast-op-1", "contrast-op-2", "contrast-op-3", "contrast-op-4");
-    
-                // Pobierz numer opcji z klasy (np. con_op_2 -> 2)
                 const match = this.className.match(/con_op_(\d)/);
                 if (match) {
                     const contrastClass = `contrast-op-${match[1]}`;
@@ -43,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const parts = src.split("/");
       const folder = parts[1];
       const filename = parts.pop();
-      const [name, ext] = filename.split(/(?=\.\w+$)/); // np. ["u_truck", ".svg"]
+      const [name, ext] = filename.split(/(?=\.\w+$)/);
 
       let newFolder, newFilename;
 
@@ -69,8 +66,15 @@ document.addEventListener("DOMContentLoaded", () => {
           newFilename = isHighContrast ? `${socialBase}_white${ext}` : `${socialBase}${ext}`;
           break;
 
+        case "buttom":
+        case "buttom_white":
+          const btnBase = name.replace(/_white$/, "");
+          newFolder = "buttom"; 
+          newFilename = isHighContrast ? `${btnBase}_white${ext}` : `${btnBase}${ext}`;
+          break;
+
         default:
-          return; // не трогаем другие изображения
+        return; 
       }
 
       const newSrc = `/${newFolder}/${newFilename}`;
@@ -80,10 +84,79 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // pierwszy update
   updateIcons();
 
-  // nasłuchiwanie zmian klas <body>
   const observer = new MutationObserver(() => updateIcons());
   observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 });
+
+
+//**слайдер */
+
+const sliderLine = document.querySelector('.slider-line');
+const sliderImages = document.querySelectorAll('.slider-line img');
+const prevButton = document.querySelector('.button-previous');
+const nextButton = document.querySelector('.button-next');
+const sliderDots = document.querySelectorAll('.slider-dot');
+
+let index = 0;
+let slideWidth = sliderImages[0].clientWidth;
+
+// === Обновление положения слайда ===
+function updateSlidePosition() {
+  sliderLine.style.transform = `translateX(-${index * slideWidth}px)`;
+  updateDots();
+  updateButtons();
+}
+
+// === Обновление точек ===
+function updateDots() {
+  const contrastClass = [...document.body.classList].find(c => c.startsWith('contrast-op-'));
+  const isHighContrast = ['contrast-op-2', 'contrast-op-4'].includes(contrastClass);
+
+  sliderDots.forEach((dot, i) => {
+    const baseName = i === index ? "ellipse-active" : "ellipse";
+    const contrastSuffix = isHighContrast ? "_white" : "";
+    dot.src = `/buttom/${baseName}${contrastSuffix}.svg`;
+    dot.setAttribute("aria-current", i === index ? "true" : "false");
+  });
+}
+
+
+// === Обновление стрелок ===
+function updateButtons() {
+  prevButton.style.display = index === 0 ? "none" : "block";
+  nextButton.style.display = index === sliderImages.length - 1 ? "none" : "block";
+}
+
+// === Навешиваем клики на стрелки ===
+nextButton.addEventListener('click', () => {
+  if (index < sliderImages.length - 1) {
+    index++;
+    updateSlidePosition();
+  }
+});
+
+prevButton.addEventListener('click', () => {
+  if (index > 0) {
+    index--;
+    updateSlidePosition();
+  }
+});
+
+// === Навешиваем клики на точки ===
+sliderDots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    index = parseInt(dot.dataset.index);
+    updateSlidePosition();
+  });
+});
+
+// === Адаптация при изменении размера окна ===
+window.addEventListener('resize', () => {
+  slideWidth = sliderImages[0].clientWidth;
+  updateSlidePosition();
+});
+
+// === Инициализация ===
+updateSlidePosition();
