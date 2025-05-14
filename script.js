@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-//**слайдер */
+//***slider***
 
 const sliderLine = document.querySelector('.slider-line');
 const sliderImages = document.querySelectorAll('.slider-line img');
@@ -102,14 +102,14 @@ const sliderDots = document.querySelectorAll('.slider-dot');
 let index = 0;
 let slideWidth = sliderImages[0].clientWidth;
 
-// === Обновление положения слайда ===
+// *** update position slider ***
 function updateSlidePosition() {
   sliderLine.style.transform = `translateX(-${index * slideWidth}px)`;
   updateDots();
   updateButtons();
 }
 
-// === Обновление точек ===
+// *** update dots ***
 function updateDots() {
   const contrastClass = [...document.body.classList].find(c => c.startsWith('contrast-op-'));
   const isHighContrast = ['contrast-op-2', 'contrast-op-4'].includes(contrastClass);
@@ -123,13 +123,12 @@ function updateDots() {
 }
 
 
-// === Обновление стрелок ===
+// *** update arrow ***
 function updateButtons() {
   prevButton.style.display = index === 0 ? "none" : "block";
   nextButton.style.display = index === sliderImages.length - 1 ? "none" : "block";
 }
 
-// === Навешиваем клики на стрелки ===
 nextButton.addEventListener('click', () => {
   if (index < sliderImages.length - 1) {
     index++;
@@ -144,7 +143,6 @@ prevButton.addEventListener('click', () => {
   }
 });
 
-// === Навешиваем клики на точки ===
 sliderDots.forEach(dot => {
   dot.addEventListener('click', () => {
     index = parseInt(dot.dataset.index);
@@ -152,11 +150,10 @@ sliderDots.forEach(dot => {
   });
 });
 
-// === Адаптация при изменении размера окна ===
+// *** adaptacja przy skalawolnosc ***
 window.addEventListener('resize', () => {
   slideWidth = sliderImages[0].clientWidth;
   updateSlidePosition();
 });
 
-// === Инициализация ===
 updateSlidePosition();

@@ -10,74 +10,150 @@ function updateHeaderOffset() {
     window.addEventListener('resize', updateHeaderOffset);
     window.addEventListener('load', updateHeaderOffset);
 
-//icons_white
-
-document.addEventListener("DOMContentLoaded", function () {
-    const contrastButtons = document.querySelectorAll(".wcag .contrast span");
-
-    // Карта иконок: оригинал → белая версия
-    const iconMap = {
-        // SOCIAL MEDIA ICONS
-        "/social_media_icons/brand-icon-charity-8245bf0e20.svg": "/social_media_icons_white/brand-icon-charity_white.svg",
-        "/social_media_icons/information-social-appgallery-bfd6ae9245.svg": "/social_media_icons_white/information-social-appgallery_white.svg",
-        "/social_media_icons/information-social-appstore-a920eef37a.svg": "/social_media_icons_white/information-social-appstore_white.svg",
-        "/social_media_icons/information-social-facebook-1b4340531f.svg": "/social_media_icons_white/information-social-facebook_white.svg",
-        "/social_media_icons/information-social-instagram-c5df47cc57.svg": "/social_media_icons_white/information-social-instagram_white.svg",
-        "/social_media_icons/information-social-linkedin-8f60937a9f.svg": "/social_media_icons_white/information-social-linkedin_white.svg",
-        "/social_media_icons/information-social-pinterest-a224b1e154.svg": "/social_media_icons_white/information-social-pinterest_white.svg",
-        "/social_media_icons/information-social-playstore-4b97bd12ca.svg": "/social_media_icons_white/information-social-playstore_white.svg",
-        "/social_media_icons/information-social-youtube-314653d2bb.svg": "/social_media_icons_white/information-social-youtube_white.svg",
-
-        // PROMOTED ICONS
-        "/promoted_icons/u_briefcase-alt.svg": "/promoted_icons_white/u_briefcase-alt_white.svg",
-        "/promoted_icons/u_fire_percentage.svg": "/promoted_icons_white/u_fire_percentage_white.svg",
-        "/promoted_icons/u_medal.svg": "/promoted_icons_white/u_medal_white.svg",
-        "/promoted_icons/u_umbrella.svg": "/promoted_icons_white/u_umbrella_white.svg",
-
-        // NAVIGATION ICONS
-        "/navigation_icon/action-common-three-dots-8d6d31cbb0.svg": "/navigation_icon_white/action-common-three-dots-white.svg",
-        "/navigation_icon/brand-subbrand-smart-d8bfa93f10.svg": "/navigation_icon_white/brand-subbrand-smart_white.svg",
-        "/navigation_icon/fi_heart.svg": "/navigation_icon_white/fi_heart_white.svg",
-        "/navigation_icon/u_angle-down.svg": "/navigation_icon_white/u_angle-down_white.svg",
-        "/navigation_icon/u_bell.svg": "/navigation_icon_white/u_bell_white.svg",
-        "/navigation_icon/u_comments-alt.svg": "/navigation_icon_white/u_comments-alt_white.svg",
-        "/navigation_icon/u_shopping-bag.svg": "/navigation_icon_white/u_shopping-bag_white.svg",
-        "/navigation_icon/u_truck.svg": "/navigation_icon_white/u_truck_white.svg"
-    };
-
-    // Обратная карта: белая версия → оригинал
-    const reverseIconMap = Object.fromEntries(
-        Object.entries(iconMap).map(([color, white]) => [white, color])
-    );
-
-    function switchToWhiteIcons() {
-        document.querySelectorAll("img").forEach(img => {
-            const src = img.getAttribute("src");
-            if (iconMap[src]) {
-                img.setAttribute("src", iconMap[src]);
-            }
-        });
-    }
-
-    function switchToColorIcons() {
-        document.querySelectorAll("img").forEach(img => {
-            const src = img.getAttribute("src");
-            if (reverseIconMap[src]) {
-                img.setAttribute("src", reverseIconMap[src]);
-            }
-        });
-    }
-
-    contrastButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            const contrastClass = "contrast-op-" + button.className.match(/\d+/)[0];
-            document.body.className = contrastClass;
-
-            if (contrastClass === "contrast-op-2" || contrastClass === "contrast-op-4") {
-                switchToWhiteIcons();
-            } else {
-                switchToColorIcons();
-            }
+    document.addEventListener("DOMContentLoaded", function () {
+        const body = document.getElementById("body");
+        const contrastOptions = document.querySelectorAll("li.contrast span");
+    
+        contrastOptions.forEach((option) => {
+            option.addEventListener("click", function () {
+                body.classList.remove("contrast-op-1", "contrast-op-2", "contrast-op-3", "contrast-op-4");
+                const match = this.className.match(/con_op_(\d)/);
+                if (match) {
+                    const contrastClass = `contrast-op-${match[1]}`;
+                    body.classList.add(contrastClass);
+                }
+            });
         });
     });
+    
+
+// icon_white
+document.addEventListener("DOMContentLoaded", () => {
+  function updateIcons() {
+    const contrastClass = [...document.body.classList].find(c => c.startsWith('contrast-op-'));
+    const isHighContrast = ['contrast-op-2', 'contrast-op-4'].includes(contrastClass);
+
+    document.querySelectorAll("img").forEach(img => {
+      const src = img.getAttribute("src");
+      if (!src) return;
+
+      const parts = src.split("/");
+      const folder = parts[1];
+      const filename = parts.pop();
+      const [name, ext] = filename.split(/(?=\.\w+$)/);
+
+      let newFolder, newFilename;
+
+      switch (folder) {
+        case "navigation_icon":
+        case "navigation_icon_white":
+          const navBase = name.replace(/_white$/, "");
+          newFolder = isHighContrast ? "navigation_icon_white" : "navigation_icon";
+          newFilename = isHighContrast ? `${navBase}_white${ext}` : `${navBase}${ext}`;
+          break;
+
+        case "promoted_icons":
+        case "promoted_icons_white":
+          const promoBase = name.replace(/_white$/, "");
+          newFolder = isHighContrast ? "promoted_icons_white" : "promoted_icons";
+          newFilename = isHighContrast ? `${promoBase}_white${ext}` : `${promoBase}${ext}`;
+          break;
+
+        case "social_media_icons":
+        case "social_media_icons_white":
+          const socialBase = name.replace(/_white$/, "");
+          newFolder = isHighContrast ? "social_media_icons_white" : "social_media_icons";
+          newFilename = isHighContrast ? `${socialBase}_white${ext}` : `${socialBase}${ext}`;
+          break;
+
+        case "buttom":
+        case "buttom_white":
+          const btnBase = name.replace(/_white$/, "");
+          newFolder = "buttom"; 
+          newFilename = isHighContrast ? `${btnBase}_white${ext}` : `${btnBase}${ext}`;
+          break;
+
+        default:
+        return; 
+      }
+
+      const newSrc = `/${newFolder}/${newFilename}`;
+      if (img.getAttribute("src") !== newSrc) {
+        img.setAttribute("src", newSrc);
+      }
+    });
+  }
+
+  updateIcons();
+
+  const observer = new MutationObserver(() => updateIcons());
+  observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 });
+
+
+//***slider***
+
+const sliderLine = document.querySelector('.slider-line');
+const sliderImages = document.querySelectorAll('.slider-line img');
+const prevButton = document.querySelector('.button-previous');
+const nextButton = document.querySelector('.button-next');
+const sliderDots = document.querySelectorAll('.slider-dot');
+
+let index = 0;
+let slideWidth = sliderImages[0].clientWidth;
+
+// *** update position slider ***
+function updateSlidePosition() {
+  sliderLine.style.transform = `translateX(-${index * slideWidth}px)`;
+  updateDots();
+  updateButtons();
+}
+
+// *** update dots ***
+function updateDots() {
+  const contrastClass = [...document.body.classList].find(c => c.startsWith('contrast-op-'));
+  const isHighContrast = ['contrast-op-2', 'contrast-op-4'].includes(contrastClass);
+
+  sliderDots.forEach((dot, i) => {
+    const baseName = i === index ? "ellipse-active" : "ellipse";
+    const contrastSuffix = isHighContrast ? "_white" : "";
+    dot.src = `/buttom/${baseName}${contrastSuffix}.svg`;
+    dot.setAttribute("aria-current", i === index ? "true" : "false");
+  });
+}
+
+
+// *** update arrow ***
+function updateButtons() {
+  prevButton.style.display = index === 0 ? "none" : "block";
+  nextButton.style.display = index === sliderImages.length - 1 ? "none" : "block";
+}
+
+nextButton.addEventListener('click', () => {
+  if (index < sliderImages.length - 1) {
+    index++;
+    updateSlidePosition();
+  }
+});
+
+prevButton.addEventListener('click', () => {
+  if (index > 0) {
+    index--;
+    updateSlidePosition();
+  }
+});
+
+sliderDots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    index = parseInt(dot.dataset.index);
+    updateSlidePosition();
+  });
+});
+
+// *** adaptacja przy skalawolnosc ***
+window.addEventListener('resize', () => {
+  slideWidth = sliderImages[0].clientWidth;
+  updateSlidePosition();
+});
+
+updateSlidePosition();

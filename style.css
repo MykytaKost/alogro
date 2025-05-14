@@ -48,7 +48,6 @@ header {
 .header_bar { 
     display: flex;
     align-items: center;
-    /*flex-wrap: wrap;*/
     padding: 16px 24px;
     max-width: 1600px; 
     margin: 0 auto;  
@@ -58,7 +57,7 @@ header {
     justify-content: center;
 }   
 
-.logo-alogro {
+.logo_alogro {
     order: 1;
 }
 .header_bar picture a img {
@@ -106,6 +105,11 @@ header {
     border-right: none;
     padding: 8px 8px 8px 0;
     flex-shrink: 0; 
+}
+
+.szukaj_wielu a {
+    text-decoration: none;
+    color: #267c75;
 }
 
 .search_select {
@@ -203,7 +207,11 @@ li.contrast span.con_op_4 {
 .navigation_icon img {
     width: 32px;
     height: 32px;
-}   
+}
+
+.icon-user  {
+    display: none   ;
+}
 
 .Moje_Allegro {
     display: flex;
@@ -221,6 +229,9 @@ li.contrast span.con_op_4 {
 @media screen and (max-width: 1300px) {
     .Moje_Allegro {
         display: none;
+    }
+    .icon-user {
+        display: contents;
     }
 }
 
@@ -250,11 +261,6 @@ li.contrast span.con_op_4 {
         order: 3;
         flex: 1 1 100%; 
         max-width: none;
-    }
-
-    .alogro-links-box {
-        flex-direction: column;
-        gap: 8px;
     }
 
     .alogro-links {
@@ -761,7 +767,8 @@ footer {
 
 .alogro-links {
     flex: 0 1 80px;
-    text-align: left; 
+    text-align: left;
+    margin: auto; 
 }
 
 .alogro-links ul {
